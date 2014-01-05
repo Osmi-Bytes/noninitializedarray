@@ -22,3 +22,9 @@ In order to avoid the O(n) initialization, I allocate the memory for the array w
  - The third part keeps the index that was initialized index per time. (help2)
 
 Therefore, arr[index] will have been initialized, when help1[index] <= time and help2[help1[index]] == index
+
+In fact, since I always access arr[index] and help1[index], I interleave the three arrays. So I have one array (array) that contains all three.
+
+arr[index] can be accessed as array[3*index]
+help1[index] can be accessed as array[3*index+1]
+help2[index] can be accessed as array[3*index+2]
