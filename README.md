@@ -25,6 +25,6 @@ Therefore, arr[index] will have been initialized, when help1[index] <= time and 
 
 In fact, since I always access arr[index] and help1[index], I interleave the three arrays. So I have one array (array) that contains all three.
 
-arr[index] can be accessed as array[3*index]
-help1[index] can be accessed as array[3*index+1]
-help2[index] can be accessed as array[3*index+2]
+- arr[index] can be accessed as array[3*index]
+- help1[index] can be accessed as array[3*index+1]
+- help2[index] can be accessed as array[3*index+2]
