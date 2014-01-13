@@ -17,12 +17,12 @@ class NArray {
 
 private:
 	int* array;
-	int* help2;
-	int counter;
+	int* initialized;
+	int count;
 
-	bool isgarbage(int index) {
-		int h = array[(index << 1)+1];
-		if(h < 0 || h > counter || help2[h] != index) {
+	bool isGarbage(int i){
+		int initializedTime = array[(i << 1)+1];
+		if(initializedTime >= count || initializedTime < 0 || initialized[initializedTime] != i) {
 			return true;
 		}
 		return false;
@@ -31,25 +31,25 @@ private:
 public:
 	NArray(int n){				
 		array = (int*) malloc(n*8);
-		help2 = (int*) malloc(n*4);
-		counter = 0;
+		initialized = (int*) malloc(n*4);
+		count = 0;
 	}
-	int get(int index) {
-		if(!isgarbage(index)){
-			return array[(index << 1)];
+	int get(int i){
+		if(!isGarbage(i)){
+			return array[(i << 1)];
 		}
-		std::cout << "ERROR: Trying to access garbage values" << std::endl;
-		throw "ERROR";
+		else {
+			std::cout << "trying to access garbage values!";
+			throw "error";
+		}
 	}
-	void set(int index, int value) {
-		int position = (index << 1);
-		if(!isgarbage(index)){
-			array[position] = value;
-		} else {
-			array[position] = value;
-			array[position+1] = ++counter;
-			help2[counter] = index;
+ 	void set(int i, int value){
+		if(isGarbage(i)){
+			array[(i << 1)+1] = count;
+			initialized[count] = i;
+			count++;
 		}
+		array[(i << 1)] = value;
 	}
 };
 
